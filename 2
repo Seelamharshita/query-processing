@@ -1,0 +1,203 @@
+9.Write a Pandas program to create a Pivot table and find the total sale amount region wise, manager wise, sales man wise. .(refer sales_data table)
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/salespivot.csv')
+region_pivot = pd.pivot_table(df , values='Sale_amt', index='Region', aggfunc='sum')
+manager_pivot = pd.pivot_table(df , values='Sale_amt', index='Manager', aggfunc='sum')
+salesperson_pivot = pd.pivot_table(df, values='Sale_amt', index='SalesMan', aggfunc='sum')
+print("Total Sale Amount Region-wise:\n", region_pivot)
+print("\nTotal Sale Amount Manager-wise:\n", manager_pivot)
+print("\nTotal Sale Amount Salesperson-wise:\n", salesperson_pivot)
+
+     
+Total Sale Amount Region-wise:
+          Sale_amt
+Region           
+Central  343239.0
+East     169460.0
+West     105424.0
+
+Total Sale Amount Manager-wise:
+          Sale_amt
+Manager          
+Douglas   78836.0
+Hermann  204698.0
+Martha   261426.0
+Timothy   73163.0
+
+Total Sale Amount Salesperson-wise:
+            Sale_amt
+SalesMan           
+Alexander  131076.0
+David        6075.0
+Diana       40500.0
+Karen       40500.0
+Luis       150948.0
+Michael     38336.0
+Shelli      25000.0
+Sigal       28750.0
+Stephen     67088.0
+Steven      89850.0
+
+
+
+10.Create a dataframe of ten rows, four columns with random values. Write a Pandas program to highlight the negative numbers red and positive numbers black.
+
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 4)
+df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+def color_negative_red(val):
+    color = 'red' if val < 0 else 'black'
+    return f'color: {color}'
+styled_df = df.style.applymap(color_negative_red)
+styled_df
+
+     
+ 	A	B	C	D
+0	0.806518	-1.782831	-0.232194	-1.003476
+1	-0.796101	0.788728	1.291733	1.757696
+2	-0.815890	-0.341975	0.028562	-1.354616
+3	-1.046654	-0.840460	-1.523997	-0.180470
+4	0.785542	-0.555843	-0.820177	-1.295845
+5	-0.090948	-2.786659	-0.606423	0.072820
+6	-1.015860	-0.835363	0.108706	-0.150335
+7	0.830984	1.025222	1.165774	1.708462
+8	1.251461	-1.611826	0.003076	-0.269812
+9	-1.107128	-0.399036	-1.474050	-1.340151
+
+
+
+
+11.Create a dataframe of ten rows, four columns with random values. Convert some values to nan values. Write a Pandas program which will highlight the nan values.
+
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 4)
+df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+df.loc[[2, 4, 6 ,8], 'B'] = np.nan
+def highlight_nan(val):
+    return 'background-color: yellow' if pd.isna(val) else ''
+styled_df = df.style.applymap(highlight_nan)
+styled_df
+
+     
+ 	A	B	C	D
+0	0.964860	-0.114740	0.062759	0.157669
+1	-0.476001	-0.138501	-1.103533	-0.553349
+2	-1.123844	nan	-1.479008	0.029554
+3	-0.069031	0.926167	0.566891	-0.021773
+4	0.340710	nan	-0.437151	1.632636
+5	-0.610389	1.139785	-1.605108	0.374200
+6	1.306448	nan	0.295036	-1.039882
+7	1.228506	0.897443	1.679461	-0.044963
+8	-0.479060	nan	-1.026281	-1.173323
+9	1.434825	-1.647474	-0.229089	-0.727899
+
+
+
+
+12.Create a dataframe of ten rows, four columns with random values. Write a Pandas program to set dataframe background Color black and font color yellow.
+
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 4)
+df = pd.DataFrame(data, columns=['A', 'B', 'C', 'D'])
+styled_df = df.style.set_properties(**{'background-color': 'black', 'color': 'yellow'})
+styled_df
+
+     
+ 	A	B	C	D
+0	-0.354197	-1.282627	-0.224236	0.520710
+1	0.249496	0.979349	-0.350792	-1.229947
+2	1.236137	-1.755609	0.042491	-0.449462
+3	-0.593680	-0.711039	-0.531772	0.100722
+4	-0.041559	1.529835	1.256439	-2.150951
+5	0.442209	0.773469	0.068448	0.088438
+6	0.101100	1.736197	-1.143640	1.969980
+7	1.078593	1.303626	2.163011	-1.446359
+8	0.113494	0.381305	2.006529	0.276725
+9	0.303077	0.027735	-2.242745	-1.344769
+
+
+
+
+13.Write a Pandas program to detect missing values of a given DataFrame. Display True or False.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/order.csv')
+missing_values = df.isnull()
+print(missing_values)
+
+     
+    ord_no  purch_amt  ord_date  customer_id  salesman_id
+0    False      False     False        False        False
+1     True      False     False        False        False
+2    False      False      True        False        False
+3    False      False     False        False         True
+4     True      False     False        False        False
+5    False      False     False        False        False
+6     True      False     False        False        False
+7    False      False     False        False         True
+8    False      False     False        False        False
+9    False      False     False        False        False
+10    True      False     False        False        False
+11   False      False     False        False         True
+
+
+
+
+14. Write a Pandas program to find and replace the missing values in a given DataFrame which do not have any valuable information.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/order.csv')
+fill_values = df.fillna(0)
+print(fill_values)
+     
+     ord_no  purch_amt    ord_date  customer_id  salesman_id
+0   70001.0     150.50  2012-10-05         3002       5002.0
+1       0.0     270.65  2012-09-10         3001       5003.0
+2   70002.0      65.26           0         3001       5001.0
+3   70004.0     110.50  2012-08-17         3003          0.0
+4       0.0     948.50  2012-09-10         3002       5002.0
+5   70005.0    2400.60  2012-07-27         3001       5001.0
+6       0.0    5760.00  2012-09-10         3001       5001.0
+7   70010.0    1983.43  2012-10-10         3004          0.0
+8   70003.0    2480.40  2012-10-10         3003       5003.0
+9   70012.0     250.45  2012-06-27         3002       5002.0
+10      0.0      75.29  2012-08-17         3001       5003.0
+11  70013.0    3045.60  2012-04-25         3001          0.0
+
+
+
+
+15.Write a Pandas program to keep the rows with at least 2 NaN values in a given DataFrame.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/customer.csv')
+nan_values = df.isna().sum(axis=1)
+df = df[nan_values >= 2]
+print(df)
+
+     
+    ord_no  purch_amt ord_date  customer_id
+0      NaN        NaN      NaN          NaN
+3      NaN        NaN      NaN          NaN
+11     NaN        NaN      NaN          NaN
+
+
+
+
+16 Write a Pandas program to split the following dataframe into groups based on school code. Also check the type of GroupBy object.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/school.csv')
+grouped = df.groupby('school')
+print(grouped)
+     
+<pandas.core.groupby.generic.DataFrameGroupBy object at 0x7e43d6cd3910>
