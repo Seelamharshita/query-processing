@@ -1,0 +1,170 @@
+17.Write a Pandas program to split the following dataframe by school code and get mean, min, and max value of age for each school.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/school.csv')
+result = df.groupby('school')['age'].agg(['mean', 'min', 'max'])
+
+print(result)
+     
+        mean  min  max
+school                
+s001    12.5   12   13
+s002    13.0   12   14
+s003    13.0   13   13
+s004    12.0   12   12
+
+
+
+
+18.Write a Pandas program to split the following given dataframe into groups based on school code and class.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/school.csv')
+grouped = df.groupby(['school', 'class'])
+for (school, class_), group in grouped:
+    print(f"School: {school}, Class: {class_}")
+    print(group)
+    print("\n")
+     
+School: s001, Class: V
+  school class            name date_of_birth  age  height  weight  address
+0   s001     V  Alberto Franco    2002-05-15   12     173      35  street1
+
+
+School: s001, Class: VI
+  school class          name date_of_birth  age  height  weight  address
+3   s001    VI  Eesha Hinton    1998-09-25   13     167      30  street1
+
+
+School: s002, Class: V
+  school class          name date_of_birth  age  height  weight  address
+1   s002     V  Gino Mcneill    2002-05-17   12     192      32  street2
+4   s002     V  Gino Mcneill    2002-05-11   14     151      31  street2
+
+
+School: s003, Class: VI
+  school class         name date_of_birth  age  height  weight  address
+2   s003    VI  Ryan Parkes    1999-02-16   13     186      33  street3
+
+
+School: s004, Class: VI
+  school class           name date_of_birth  age  height  weight  address
+5   s004    VI  David Parkers    1997-09-15   12     159      32  street4
+
+
+
+
+19.Write a Pandas program to display the dimensions or shape of the World alcohol consumption dataset. Also extract the column names from the dataset.
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/alcohol.csv')
+dimensions = df.shape
+print("Dimensions (Shape) of the DataFrame: ", dimensions)
+column_names = df.columns
+print("Column Names: ", column_names)
+     
+Dimensions (Shape) of the DataFrame:  (5, 5)
+Column Names:  Index(['Year', 'WHO region', 'Country', 'Types', 'Display Value'], dtype='object')
+
+
+
+
+20.Write a Pandas program to find the index of a given substring of a DataFrame column.
+
+import pandas as pd
+data = {
+    'Column1': ['apple', 'banana', 'cherry', 'date', 'elderberry'],
+    'Column2': [1, 2, 3, 4, 5]
+}
+df = pd.DataFrame(data)
+substring = 'an'
+indices = df['Column1'].str.find(substring)
+df['Index_of_Substring'] = indices
+print(df)
+
+     
+      Column1  Column2  Index_of_Substring
+0       apple        1                  -1
+1      banana        2                   1
+2       anime        3                   0
+3        date        4                  -1
+4  elderberry        5                  -1
+
+
+
+
+
+21.Write a Pandas program to swap the cases of a specified character column in a given DataFrame.
+
+import pandas as pd
+data = {
+    'Text_Column': ['Hello', 'wOrLd', 'Python', 'pAnDaS', 'DaTaFrAmE']
+}
+df = pd.DataFrame(data)
+df['Text_Column'] = df['Text_Column'].str.swapcase()
+print(df)
+
+     
+  Text_Column
+0       hELLO
+1       WoRlD
+2      pYTHON
+3      PaNdAs
+4   dAtAfRaMe
+
+
+
+
+22.Write a Python program to draw a line with suitable label in the x axis, y axis and a title.
+
+import matplotlib.pyplot as plt
+x = [10,20,30,40,50]
+y = [20,40,60,80,100]
+plt.plot(x, y)
+plt.xlabel('X-axis Label')
+plt.ylabel('Y-axis Label')
+plt.title('Line Plot with Labels')
+plt.show()
+
+     
+
+23.Write a Python program to draw a line using given axis values taken from a text file, with suitable label in the x axis, y axis and a title.
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+with open('/content/drive/MyDrive/Query datasets/test.txt', 'r') as file:
+    lines = file.readlines()
+    data = [line.strip().split() for line in lines]
+x_values, y_values = zip(*[(float(x), float(y)) for x, y in data])
+plt.plot(x_values, y_values)
+plt.xlabel('X-axis Label')
+plt.ylabel('Y-axis Label')
+plt.title('Line Plot with Labels')
+plt.show()
+
+     
+
+24.Write a Python program to draw line charts of the financial data of Alphabet Inc. between October 3, 2016 to October 7, 2016.
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+df = pd.read_csv('/content/drive/MyDrive/Query datasets/fdata.csv')
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
+plt.figure(figsize=(10, 6))
+plt.plot(df.index, df['Open'], label='Open', color='blue', marker='o')
+plt.plot(df.index, df['High'], label='High', color='green', marker='o')
+plt.plot(df.index, df['Low'], label='Low', color='red', marker='o')
+plt.plot(df.index, df['Close'], label='Close', color='purple', marker='o')
+plt.title('Alphabet Inc. Stock Prices (Oct 3, 2016 - Oct 7, 2016)')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend(loc='upper left')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
