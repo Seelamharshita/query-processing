@@ -1,0 +1,162 @@
+33.Write a Python program to draw a scatter plot with empty circles taking a random distribution in X and Y and plotted against each other.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.random.rand(100)
+y = np.random.rand(100)
+plt.scatter(x, y, label='Random Data', color='green',marker='o',facecolors='none',edgecolors='green')
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
+plt.title('Scatter Plot of Random Data')
+plt.legend()
+plt.show()
+     
+
+34.Write a Python program to draw a scatter plot using random distributions to generate balls of different sizes.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.random.randint(100, size=(100))
+y = np.random.randint(100, size=(100))
+colors = np.random.randint(100, size=(100))
+sizes = np.random.randint(10,100, size=(100))
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.6, cmap='viridis')
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
+plt.title('Scatter Plot with Randomly Sized Balls')
+plt.legend()
+plt.show()
+     
+WARNING:matplotlib.legend:No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+
+
+
+35.Write a Python program to draw a scatter plot comparing two subject marks of Mathematics and Science. Use marks of 10 students.
+
+import matplotlib.pyplot as plt
+m1 = [88, 92, 80, 89, 100, 80, 60, 100, 80, 34]
+s = [35, 79, 79, 48, 100, 88, 32, 45, 20, 30]
+range = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+plt.scatter(range,m1, label='Math', color='blue')
+plt.scatter(range,s, label='SScience', color='red')
+plt.xlabel('Math Marks')
+plt.ylabel('Science Marks')
+plt.title('Scatter Plot: Math vs. Science Marks')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+     
+
+36.Write a Python program to draw a scatter plot for three different groups comparing weights and heights.
+
+import matplotlib.pyplot as plt
+import numpy as np
+h1 = np.random.normal(160, 10, 50)  # Mean height: 160 cm, Standard deviation: 10 cm
+w1 = np.random.normal(65, 5, 50)
+h2 = np.random.normal(170, 8, 50)
+w2 = np.random.normal(75, 6, 50)
+h3 = np.random.normal(155, 12, 50)
+w3 = np.random.normal(60, 7, 50)
+plt.scatter(h1, w1, label='Group 1', color='blue', marker='o')
+plt.scatter(h2, w2, label='Group 2', color='red', marker='*')
+plt.scatter(h3, w3, label='Group 3', color='green', marker='s')
+plt.xlabel('Weight (kg)')
+plt.ylabel('Height (cm)')
+plt.title('Scatter Plot: Heights vs. Weights for Three Groups')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+
+     
+
+37.Write a Pandas program to create a dataframe from a dictionary and display it.
+
+import pandas as pd
+data= {'X':[78,85,96,80,86],
+       'Y':[84,94,89,83,86],
+       'Z':[86,97,96,72,83]}
+df=pd.DataFrame(data)
+print(df)
+     
+    X   Y   Z
+0  78  84  86
+1  85  94  97
+2  96  89  96
+3  80  83  72
+4  86  86  83
+
+
+
+38.Write a Pandas program to create and display a DataFrame from a specified dictionary data which has the index labels.
+
+import pandas as pd
+data={'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes'],
+'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19]
+}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+df=pd.DataFrame(data,index=labels)
+print(df)
+
+     
+   attempts       name qualify  score
+a         1  Anastasia     yes   12.5
+b         3       Dima      no    9.0
+c         2  Katherine     yes   16.5
+d         3      James      no    NaN
+e         2      Emily      no    9.0
+f         3    Michael     yes   20.0
+g         1    Matthew     yes   14.5
+h         1      Laura      no    NaN
+i         2      Kevin      no    8.0
+j         1      Jonas     yes   19.0
+
+
+
+39.Write a Pandas program to get the first 3 rows of a given DataFrame.
+
+import pandas as pd
+data={'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes'],
+'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19]
+}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+df=pd.DataFrame(data,index=labels)
+first=df.head(3)
+print("First 3 Rows of given Dataframe :" ,first)
+     
+First 3 Rows of given Dataframe :    attempts       name qualify  score
+a         1  Anastasia     yes   12.5
+b         3       Dima      no    9.0
+c         2  Katherine     yes   16.5
+
+
+
+40.Write a Pandas program to select the 'name' and 'score' columns from the following DataFrame.
+
+import pandas as pd
+data={'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes'],
+'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19]
+}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+df=pd.DataFrame(data,index=labels)
+print(df[['name','score']])
+     
+        name  score
+a  Anastasia   12.5
+b       Dima    9.0
+c  Katherine   16.5
+d      James    NaN
+e      Emily    9.0
+f    Michael   20.0
+g    Matthew   14.5
+h      Laura    NaN
+i      Kevin    8.0
+j      Jonas   19.0
